@@ -1,6 +1,9 @@
 var WebSocket = require('ws'); //Require ws Websockets package
 var ws = new WebSocket('ws://wikimon.hatnote.com/en/'); //Open websocket to Wikipedia edit stream
 
+var dgram = require('dgram'); //Require datagram package (built in to Node.js)
+var socket = dgram.createSocket('udp4'); //Create a datagram socket to send from
+
 var globes = new Uint8Array(160); //Create array of globes
 
 //Clear all globes to black/off
@@ -10,9 +13,6 @@ for (i = 0; i < 160; i++) {
 
 //Upon receiving a message
 ws.on('message', function(data, flags) {
-	var dgram = require('dgram'); //Require datagram package (built in to Node.js)
-	socket = dgram.createSocket('udp4'); //Create a datagram socket to send from
-	
 	light = Math.round(Math.random() * 49) * 3 + 10; //Choose a random light
 	//Set the RGB colour of that light
 	globes[light] = Math.round(Math.random() * 256);

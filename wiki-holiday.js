@@ -31,3 +31,8 @@ ws.on('message', function(data, flags) {
 		}
 	});
 });
+
+//Upon receiving a close/disconnect message...
+ws.on('close', function() {
+	ws = new WebSocket('ws://wikimon.hatnote.com/en/'); //Attempt to reconnect straight away
+});

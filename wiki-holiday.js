@@ -25,7 +25,7 @@ ws.on('message', function(data, flags) {
 	var message = new Buffer(globes); //Create a datagram message from the array of globe values
 	
 	//Send the datagram containing globe values
-	socket.send(message, 0, message.length, 9988, "192.168.0.115", function(err, bytes) { 
+	socket.send(message, 0, message.length, 9988, process.argv[2], function(err, bytes) { 
 		if (err) { //If datagram sending errors...
 			console.log(err); //Log error to console
 		}
